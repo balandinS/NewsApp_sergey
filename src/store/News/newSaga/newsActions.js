@@ -11,7 +11,7 @@ export function* newsGetAndUpdate({fetchData}, actionNum = 1) {
   };
   yield put({type: updateUserTypes[actionNum].started});
   try {
-    const category = yield select(({NewsReduce}) => NewsReduce.category);
+    const category = yield select(({NewsReduce}) => NewsReduce.currentCategory);
     const params = !!category
       ? `sources?category$category=${category}`
       : 'sources';

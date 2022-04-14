@@ -13,9 +13,10 @@ import * as TYPES from '../types';
 function* NewsStart(api) {
   const results = yield all([call(sagaActions.newsGetAndUpdate, api, 1)]);
   const weAreAllForked = yield fork(listenToUpdateSagas);
-  yield take(TYPES.RESET_NEWS_DATA);
+  
+ // yield take(TYPES.RESET_NEWS_DATA);
   // cancel listeners for update sagas when component unmount
-  yield cancel(weAreAllForked);
+  //yield cancel(weAreAllForked);
 }
 
 function* listenToUpdateSagas(api) {
@@ -23,7 +24,7 @@ function* listenToUpdateSagas(api) {
 }
 
 function* updateCategoryStatementSaga({payload}) {
-  yield put({type: TYPES.SET_CATEGORY, payload});
+  yield put({type: 'SELECTED_CATEGORY', payload});
 }
 
 export default NewsStart;
